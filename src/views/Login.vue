@@ -47,9 +47,10 @@ export default {
   methods: {
     signin() {
       const api = `${process.env.VUE_APP_API}api/admin/signin`;
-      console.log(api);
       this.$http.post(api, this.user)
         .then((res) => {
+          const { token, expirationDate } = res.data;
+          document.cookie = `hexToken=${token}; expires=${new Date(expirationDate)}`;
           console.log(res);
         });
     },
