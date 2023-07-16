@@ -11,17 +11,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>分類</td>
-        <td>標題</td>
+      <tr v-for="item in products" :key="item.id">
+        <td>{{ item.Category.name }}</td>
+        <td>{{ item.name }}</td>
         <td class="text-right">
-          200
+          {{ item.origin_price }}
         </td>
         <td class="text-right">
-          100
+          {{ item.price }}
         </td>
         <td>
-          <span class="text-success">啟用</span>
+          <span class="text-success" v-if="item.is_enabled">啟用</span>
+          <span class="text-muted" v-else>未啟用</span>
         </td>
         <td>
           <div class="btn-group">
@@ -45,9 +46,8 @@ export default {
       const api = `${process.env.VUE_APP_API}api/admin/products`;
       this.$http.get(api)
         .then((res) => {
-          if (res.data.success) {
-            console.log(res.data);
-          }
+          console.log(res.data);
+          this.products = res.data.products.products;
         });
     },
   },
