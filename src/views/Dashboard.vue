@@ -16,7 +16,7 @@ export default {
     console.log(token);
     // token加入headers
     this.$http.defaults.headers.common.Authorization = token;
-    const api = `${process.env.VUE_APP_API}api/currentUser`;
+    const api = `${process.env.VUE_APP_API}api/currentuser`;
     this.$http.get(api, this.user)
       .then((res) => {
         console.log(res);
